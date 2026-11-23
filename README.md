@@ -2,7 +2,7 @@
 
 This repository contains the source code for my Natural Language Processing (NLP) introductory course.
 
-Slideshows are written in [Typst](https://github.com/typst/typst) and rendered with [Touying](https://github.com/touying-typ/touying). Labs use [Googla Colaboratory](https://colab.research.google.com/).
+Slideshows are written in [Typst](https://github.com/typst/typst) and rendered with [Touying](https://github.com/touying-typ/touying). Labs use [Google Colaboratory](https://colab.research.google.com/).
 
 ## Table of Contents
 
