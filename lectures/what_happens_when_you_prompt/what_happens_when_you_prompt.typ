@@ -18,16 +18,9 @@
 #title-slide[
   // Institution logos
   #place(
-    bottom + left,
-    dx: 10mm,
+    bottom + center,
     link("https://ensc.bordeaux-inp.fr")[#image("../../images/ensc_logo.jpg", width: 15%)],
   )
-  #place(
-    bottom + right,
-    dx: -10mm,
-    link("https://www.institutoptique.fr")[#image("../../images/iogs_logo.jpg", width: 15%)],
-  )
-
   #title[
     #main_title
   ]
