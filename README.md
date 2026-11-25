@@ -19,7 +19,7 @@ Slideshows are written in [Typst](https://github.com/typst/typst) and rendered w
 
 ```bash
 # Generate the PDF version of a slideshow
-typst compile --root . lectures/{chapter}/{filename}.typ
+typst compile lectures/{chapter}/{filename}.typ
 ```
 
 I use the [Typst VS Code extension](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) for showcasing slideshows during classes.

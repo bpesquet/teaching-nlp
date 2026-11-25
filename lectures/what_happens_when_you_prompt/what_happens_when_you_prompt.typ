@@ -19,7 +19,7 @@
   // Institution logos
   #place(
     bottom + center,
-    link("https://ensc.bordeaux-inp.fr")[#image("../../images/ensc_logo.jpg", width: 15%)],
+    link("https://ensc.bordeaux-inp.fr")[#image("images/ensc_logo.jpg", width: 15%)],
   )
   #title[
     #main_title
