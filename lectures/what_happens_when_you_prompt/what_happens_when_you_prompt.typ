@@ -36,7 +36,7 @@
 
 == Outline <touying:hidden>
 
-#show outline: set text(size: 20pt)
+#show outline: set text(size: 17pt)
 
 #components.adaptive-columns(outline(title: none, depth: 3, indent: 1em))
 
@@ -53,6 +53,49 @@
 == Information flow
 
 #align(center, image("images/prompt_information_flow.svg", width: 68%))
+
+= From base model to assistant
+
+== Pretraining
+
+- Next-token prediction on trillions of tokens of web pages, books and code.
+- Result: a _base model_, a powerful _document completer_ with broad knowledge... but not an assistant.
+- By far the most expensive stage: weeks on thousands of GPUs.
+
+== Supervised fine-tuning (SFT)
+
+- Same next-token objective, on example conversations written in the chat template format.
+- The loss is only computed on the assistant's tokens.
+- The model learns the format, the special tokens (e.g. end of turn), when to stop, how to follow instructions.
+- Much less data than pretraining: thousands to millions of conversations.
+
+== Preference tuning
+
+- Data: pairs of answers to the same prompt, one _chosen_ and one _rejected_, by humans or AI judges.
+- _RLHF_: learn a reward model from the pairs, then maximize its reward with reinforcement learning, staying close to the SFT model.
+- _DPO_: no reward model, a direct loss on the pairs ($pi_"ref"$: model before tuning).
+
+$
+  cal(L)_"DPO" = -log sigma(beta log (pi_theta (y_w | x)) / (pi_"ref" (y_w | x)) - beta log (pi_theta (y_l | x)) / (pi_"ref" (y_l | x)))
+$
+
+== Summary
+
+#text(size: 17pt)[
+  #figure(
+    table(
+      columns: (auto, 1fr, 1fr, 1fr),
+      align: left,
+      table.header([*Stage*], [*Data*], [*Objective*], [*Brings*]),
+      [Pretraining], [raw text, trillions of tokens], [next token], [knowledge, language],
+      [SFT], [example conversations], [next token (assistant only)], [format, instruction following],
+      [Preference tuning], [chosen/rejected pairs], [RLHF, DPO], [helpfulness, harmlessness, style],
+    ),
+  )
+
+]
+
+Reasoning models add reinforcement learning on _verifiable_ tasks (math, code with tests).
 
 = Step-by-step process
 
@@ -137,6 +180,10 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
   ),
 )
 
+---
+
+#align(horizon + center)[👩🏻‍💻 Activity 1: inspect the context actually sent to the model.]
+
 == Model
 
 === Input representations
@@ -178,6 +225,10 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 
 ---
 
+#align(horizon + center)[🧑🏻‍💻 Activity 2: dissect a real model, its tokenizer and its base version.]
+
+---
+
 === Sampling and decoding
 
 - The model produces $RR$-valued scores (_logits_) for possible next tokens.
@@ -200,6 +251,14 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 
 ---
 
+#align(horizon + center)[👨🏼‍💻 Activity 3: write your own decoding loop.
+
+  #v(1em)
+
+  👩🏼‍💻 Activity 4: measure what preference tuning changed.]
+
+---
+
 === Infrastructure and optimizations
 
 - Model-serving systems use GPUs or other specialized accelerators to perform operations.
@@ -213,6 +272,10 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 - The harness determines whether to continue generation, execute a tool and update the context, return a response or stop processing.
 - A complex task may cycle through this loop many times.
 - Tools may run on the provider's servers, on the client machine or on external services.
+
+---
+
+#align(horizon + center)[👩🏽‍💻 Activity 5: build a minimal harness with tool calling.]
 
 == Response streaming and rendering
 
