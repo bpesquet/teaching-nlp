@@ -3,3 +3,6 @@
 
 # PDF output
 *.pdf
+
+# microgpt dataset
+input.txt

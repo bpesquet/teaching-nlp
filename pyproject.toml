@@ -1,0 +1,12 @@
+[project]
+name = "teaching-nlp"
+version = "0.1.0"
+description = "Source code for my NLP introductory course"
+license = "CC BY-NC-SA, MIT"
+license-files = ["LICENSE", "CODE_LICENSE"]
+readme = "README.md"
+authors = [
+    { name = "Baptiste Pesquet", email = "bpesquet@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
